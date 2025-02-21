@@ -61,109 +61,115 @@ const Index = () => {
 
       {/* Location Section */}
       <section className="container px-4 py-8 mx-auto animate-fadeIn delay-100">
-        <a
-          href={EventDetails.location.mapUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
-        >
-          <div className="flex items-start space-x-4">
-            <MapPin className="w-6 h-6 text-event-purple flex-shrink-0" />
-            <div>
-              <h3 className="font-semibold text-event-purple">
-                {EventDetails.location.name}
-              </h3>
-              <p className="text-event-gray mt-1">
-                {EventDetails.location.address}
-              </p>
+        <div className="max-w-xl mx-auto">
+          <a
+            href={EventDetails.location.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-start space-x-4">
+              <MapPin className="w-6 h-6 text-event-purple flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold text-event-purple">
+                  {EventDetails.location.name}
+                </h3>
+                <p className="text-event-gray mt-1">
+                  {EventDetails.location.address}
+                </p>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </section>
 
       {/* Guest List Section with RSVP */}
       <section className="container px-4 py-8 mx-auto animate-fadeIn delay-200">
-        <div className="flex items-center space-x-2 mb-4">
-          <User className="w-5 h-5 text-event-purple" />
-          <h2 className="text-xl font-semibold text-event-purple">
-            {EventDetails.guests.length} khách
-          </h2>
-        </div>
-        <div className="space-y-4">
-          {EventDetails.guests.map((guest, index) => (
-            <div
-              key={index}
-              className="p-4 bg-white rounded-lg shadow-sm space-y-3"
-            >
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-event-lightPurple flex items-center justify-center">
-                  <span className="text-event-purple font-semibold">
-                    {guest.name[0]}
-                  </span>
+        <div className="max-w-xl mx-auto">
+          <div className="flex items-center space-x-2 mb-4">
+            <User className="w-5 h-5 text-event-purple" />
+            <h2 className="text-xl font-semibold text-event-purple">
+              {EventDetails.guests.length} khách
+            </h2>
+          </div>
+          <div className="space-y-4">
+            {EventDetails.guests.map((guest, index) => (
+              <div
+                key={index}
+                className="p-4 bg-white rounded-lg shadow-sm space-y-3"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-full bg-event-lightPurple flex items-center justify-center">
+                    <span className="text-event-purple font-semibold">
+                      {guest.name[0]}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-event-purple">{guest.name}</h3>
+                    <p className="text-sm text-event-gray">{guest.email}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-medium text-event-purple">{guest.name}</h3>
-                  <p className="text-sm text-event-gray">{guest.email}</p>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-1">
+                    {guest.confirmed ? (
+                      <Check className="w-4 h-4 text-green-500" />
+                    ) : (
+                      <X className="w-4 h-4 text-red-500" />
+                    )}
+                    <span className="text-sm text-event-gray">
+                      {guest.confirmed ? "Đã xác nhận" : "Chưa xác nhận"}
+                    </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleParticipationChange(true)}
+                      className={`px-4 py-2 rounded-lg transition-colors flex-1 ${
+                        isParticipating
+                          ? "bg-event-purple text-white"
+                          : "bg-gray-100 text-gray-600"
+                      }`}
+                    >
+                      Tham gia
+                    </button>
+                    <button
+                      onClick={() => handleParticipationChange(false)}
+                      className={`px-4 py-2 rounded-lg transition-colors flex-1 ${
+                        !isParticipating
+                          ? "bg-event-purple text-white"
+                          : "bg-gray-100 text-gray-600"
+                      }`}
+                    >
+                      Vắng mặt
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-1">
-                  {guest.confirmed ? (
-                    <Check className="w-4 h-4 text-green-500" />
-                  ) : (
-                    <X className="w-4 h-4 text-red-500" />
-                  )}
-                  <span className="text-sm text-event-gray">
-                    {guest.confirmed ? "Đã xác nhận" : "Chưa xác nhận"}
-                  </span>
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => handleParticipationChange(true)}
-                    className={`px-4 py-2 rounded-lg transition-colors flex-1 ${
-                      isParticipating
-                        ? "bg-event-purple text-white"
-                        : "bg-gray-100 text-gray-600"
-                    }`}
-                  >
-                    Tham gia
-                  </button>
-                  <button
-                    onClick={() => handleParticipationChange(false)}
-                    className={`px-4 py-2 rounded-lg transition-colors flex-1 ${
-                      !isParticipating
-                        ? "bg-event-purple text-white"
-                        : "bg-gray-100 text-gray-600"
-                    }`}
-                  >
-                    Vắng mặt
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Timeline Section */}
       <section className="container px-4 py-8 mx-auto animate-fadeIn delay-300">
-        <h2 className="text-xl font-semibold mb-4 text-event-purple">
-          Timeline sự kiện
-        </h2>
-        <div className="space-y-4">
-          {EventDetails.timeline.map((item, index) => (
-            <div
-              key={index}
-              className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
-            >
-              {item.time && (
-                <span className="text-event-gray font-medium min-w-[100px]">
-                  {item.time}
-                </span>
-              )}
-              <span className="text-event-purple">{item.event}</span>
-            </div>
-          ))}
+        <div className="max-w-xl mx-auto">
+          <h2 className="text-xl font-semibold mb-4 text-event-purple">
+            Timeline sự kiện
+          </h2>
+          <div className="space-y-4">
+            {EventDetails.timeline.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+              >
+                {item.time && (
+                  <span className="text-event-gray font-medium min-w-[100px]">
+                    {item.time}
+                  </span>
+                )}
+                <span className="text-event-purple">{item.event}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
