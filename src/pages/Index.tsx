@@ -195,7 +195,7 @@ const Index = () => {
                       ) : (
                         <div className="w-10 h-10 rounded-full bg-event-lightPurple flex items-center justify-center">
                           <span className="text-event-purple font-semibold">
-                            {guest.name[0]}
+                            {guest.name.split(" ").at(-1)[0]}
                           </span>
                         </div>
                       )}
