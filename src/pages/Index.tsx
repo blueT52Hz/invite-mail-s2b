@@ -156,7 +156,7 @@ const Index = () => {
         <section className="container mx-0 my-0 px-0 animate-fadeIn overflow-hidden">
           <div className="mb-8">
             <img
-              src={EventDetails.thumbnail}
+              src={"/images/cover.png"}
               alt="Event thumbnail"
               className="w-full rounded-lg mb-4 object-cover"
             />
