@@ -28,9 +28,9 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         event: {
-          purple: "#7E22CE",
+          purple: "#2E5077",
           lightPurple: "#E9D5FF",
-          darkPurple: "#581C87",
+          darkPurple: "#074799",
           gray: "#6B7280",
         },
         primary: {
