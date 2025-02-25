@@ -17,7 +17,7 @@ import { useSearchParams } from "react-router-dom";
 const EventDetails = {
   title:
     "Thư mời Tham dự Sinh nhật\n Cộng đồng phát triển tài năng sinh viên S2B",
-  date: "Thứ Bảy, ngày 15 tháng 3",
+  date: "Thứ Bảy, ngày 15 tháng 3 năm 2025",
   time: "18:00-21:30",
   dressCode: ["#2E5077", "#000", "#fff"],
   thumbnail:
