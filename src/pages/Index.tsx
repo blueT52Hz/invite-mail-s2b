@@ -28,19 +28,19 @@ const EventDetails = {
     mapUrl: "https://www.google.com/maps?cid=11743612530132812167",
   },
   timeline: [
-    { time: "18h - 18h30", event: "Check In khách mời" },
-    { time: "18h30 - 18h40", event: "Văn nghệ mở đầu" },
-    { time: "18h40 - 18h43", event: "Khai mạc chương trình" },
-    { time: "18h43 - 18h54", event: "Giới thiệu khách mời tham gia" },
+    { time: "18:00 - 18:30", event: "Check In khách mời" },
+    { time: "18:30 - 18:40", event: "Văn nghệ mở đầu" },
+    { time: "18:40 - 18:43", event: "Khai mạc chương trình" },
+    { time: "18:43 - 18:54", event: "Giới thiệu khách mời tham gia" },
     {
-      time: "18h54 - 19h20",
+      time: "18:54 - 19:20",
       event: "Chủ nhiệm 3 CLB nhận quà và phát biểu cảm nghĩ",
     },
-    { time: "19h20 - 19h55", event: "Văn nghệ, Tea break và Minigame" },
-    { time: "19h55 - 20h06", event: "Tri ân anh Chế Đình Sơn, Cắt bánh" },
-    { time: "20h06 - 20h11", event: "Lời tri ân, lời hứa" },
-    { time: "20h11 - 20h16", event: "Văn nghệ: Nhảy" },
-    { time: "20h16 - hết", event: "Bế mạc" },
+    { time: "19:20 - 19:55", event: "Văn nghệ, Tea break và Minigame" },
+    { time: "19:55 - 20:06", event: "Tri ân anh Chế Đình Sơn, Cắt bánh" },
+    { time: "20:06 - 20:11", event: "Lời tri ân, lời hứa" },
+    { time: "20:11 - 20:16", event: "Văn nghệ: Nhảy" },
+    { time: "20:16 - Hết", event: "Bế mạc" },
   ],
 };
 
@@ -166,7 +166,7 @@ const Index = () => {
             <div className="flex items-center justify-center space-x-2 text-event-gray">
               <Clock className="w-5 h-5" />
               <span>
-                {EventDetails.date} • {EventDetails.time} 
+                {EventDetails.date} • {EventDetails.time}
               </span>
             </div>
           </div>
