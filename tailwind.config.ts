@@ -20,6 +20,7 @@ export default {
     extend: {
       screens: {
         min757: "757px",
+        min478: "478px",
       },
       colors: {
         border: "hsl(var(--border))",

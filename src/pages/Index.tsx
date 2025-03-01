@@ -170,9 +170,11 @@ const Index = () => {
             </h1>
             <div className="flex items-center justify-center space-x-2 text-event-gray px-4 md:px-0">
               <Clock className="w-5 h-5" />
-              <span>
-                {EventDetails.date} • {EventDetails.time}
-              </span>
+              <div className="flex flex-col min478:flex-row gap-0 min478:gap-2">
+                <div>{EventDetails.date}</div>
+                <div className="hidden min478:block">•</div>
+                <div>{EventDetails.time}</div>
+              </div>
             </div>
           </div>
         </section>
@@ -256,7 +258,7 @@ const Index = () => {
                     Thông tin Khách mời
                   </h2>
                 </div>
-                <div className="space-y-4 px-14">
+                <div className="space-y-4 px-4 min478:px-14">
                   <div className="space-y-3">
                     <div className="flex items-center space-x-3">
                       {/* Avatar + Name */}
