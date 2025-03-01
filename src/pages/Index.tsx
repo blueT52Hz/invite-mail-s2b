@@ -10,37 +10,41 @@ import {
   MapPinned,
   Eye,
   ArrowRight,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const EventDetails = {
   title:
     "Thư mời Tham dự Sinh nhật\n Cộng đồng phát triển tài năng sinh viên S2B",
   date: "Thứ Bảy, ngày 15 tháng 3 năm 2025",
-  time: "18:00-21:30",
+  time: "18:30-21:30",
   dressCode: ["#2E5077", "#000", "#fff"],
   thumbnail:
     "https://scontent.fhan14-2.fna.fbcdn.net/v/t1.15752-9/476365829_646358724576002_622861065549252183_n.png?stp=dst-png_s2048x2048&_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGp7ydtdN7KXqUKbLJD0TEbR9-J9seVgntH34n2x5WCe41a_pv97YdncQg7Lbken_y5NagM_JhSJsYvaLtHNEAC&_nc_ohc=l7xs6GqkCtMQ7kNvgFRjQ-K&_nc_oc=AdixOBcFjd4xKznXk-pJJxZjqE8SwR3G_0uuHQBJ6cNSUZEShX-G49Mr9NbzizYuD2g&_nc_zt=23&_nc_ht=scontent.fhan14-2.fna&oh=03_Q7cD1gF6rB1jeac1Z1_EkDEMbrkIDu5fxJ91g3LEfgHQqt_jsw&oe=67E3B241",
   location: {
-    name: "Học viện Công nghệ Bưu chính viễn thông",
-    address: "96A Đ. Trần Phú, P. Mộ Lao, Hà Đông, Hà Nội, Việt Nam",
+    name: "Tầng 11 VG Building",
+    address: "Ngõ 235 Đ. Nguyễn Trãi, Thanh Xuân Trung, Thanh Xuân, Hà Nội",
     mapUrl: "https://www.google.com/maps?cid=11743612530132812167",
   },
   timeline: [
-    { time: "18:00 - 18:30", event: "Check In khách mời" },
-    { time: "18:30 - 18:40", event: "Văn nghệ mở đầu" },
-    { time: "18:40 - 18:43", event: "Khai mạc chương trình" },
-    { time: "18:43 - 18:54", event: "Giới thiệu khách mời tham gia" },
+    { time: "18:30 - 19:00", event: "Check In khách mời" },
+    { time: "19:00 - 19:13", event: "Văn nghệ mở đầu và Khai mạc" },
+    { time: "19:13 - 19:24", event: "Giới thiệu khách mời tham gia" },
     {
-      time: "18:54 - 19:20",
+      time: "19:24 - 19:50",
       event: "Chủ nhiệm 3 CLB nhận quà và phát biểu cảm nghĩ",
     },
-    { time: "19:20 - 19:55", event: "Văn nghệ, Tea break và Minigame" },
-    { time: "19:55 - 20:06", event: "Tri ân anh Chế Đình Sơn, Cắt bánh" },
-    { time: "20:06 - 20:11", event: "Lời tri ân, lời hứa" },
-    { time: "20:11 - 20:16", event: "Văn nghệ: Nhảy" },
-    { time: "20:16 - Hết", event: "Bế mạc" },
+    { time: "19:50 - 20:25", event: "Văn nghệ và Minigame" },
+    {
+      time: "20:25 - 20:41",
+      event: "Tri ân anh Chế Đình Sơn, Cắt bánh sinh nhật",
+    },
+    { time: "20:41 - 20:46", event: "Văn nghệ: Nhảy" },
+    { time: "20:46 - Hết", event: "Bế mạc" },
   ],
 };
 
@@ -65,6 +69,7 @@ const postTestUrlPRO =
   "https://workflow.proptit.com/webhook-test/515425de-e385-4777-b05e-310fc8afbec2";
 
 const Index = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
   const clb = searchParams.get("club");
@@ -160,10 +165,10 @@ const Index = () => {
               alt="Event thumbnail"
               className="w-full rounded-lg mb-4 object-cover"
             />
-            <h1 className="text-[1.75rem] md:text-4xl font-bold text-center text-event-purple mb-4 min757:px-0 px-4">
+            <h1 className="text-[1.5rem] md:text-4xl font-bold text-center text-event-purple mb-4 min757:px-0 px-4">
               {EventDetails.title}
             </h1>
-            <div className="flex items-center justify-center space-x-2 text-event-gray">
+            <div className="flex items-center justify-center space-x-2 text-event-gray px-4 md:px-0">
               <Clock className="w-5 h-5" />
               <span>
                 {EventDetails.date} • {EventDetails.time}
@@ -176,8 +181,8 @@ const Index = () => {
           {/* Dresscode */}
           <section className="container px-0 py-0 mx-0 animate-fadeIn delay-300 -mb-4">
             <div className="flex items-center mb-4">
-              <PaletteIcon className="w-8 h-8 text-event-purple" size={"32"} />
-              <h2 className="text-xl font-semibold text-event-purple ml-4">
+              <PaletteIcon className="md:w-8 md:h-8 text-event-purple" />
+              <h2 className="md:text-xl text-base font-semibold text-event-purple ml-4">
                 Dresscode:
               </h2>
               <div className="flex space-x-2 ml-2">
@@ -185,7 +190,7 @@ const Index = () => {
                   return (
                     <span
                       key={index}
-                      className="w-6 h-6 rounded-full border-black border shadow-md"
+                      className="md:w-6 md:h-6 w-4 h-4 rounded-full border-black border shadow-md"
                       style={{ backgroundColor: item }}
                     ></span>
                   );
@@ -196,26 +201,48 @@ const Index = () => {
           {/* Location Section */}
           <section className="container mx-0 px-0 py-0 animate-fadeIn delay-100">
             <div className="">
-              <a
-                href={EventDetails.location.mapUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block hover:bg-slate-100 transition-all rounded-lg py-2 relative"
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="block w-full hover:bg-slate-100 transition-all rounded-lg py-2 relative text-left"
               >
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <div className="flex items-start space-x-4">
-                    <MapPinned className="w-8 h-8 my-auto text-event-purple flex-shrink-0" />
+                    <MapPinned className="md:w-8 md:h-8 my-auto text-event-purple flex-shrink-0" />
                     <div>
-                      <h3 className="font-semibold text-event-purple text-xl">
+                      <h3 className="font-semibold text-event-purple text-base md:text-xl">
                         {EventDetails.location.name}
                       </h3>
-                      <p className="text-event-gray mt-1">
+                      <p className="text-event-gray mt-1 text-sm md:text-base">
                         {EventDetails.location.address}
                       </p>
                     </div>
                   </div>
+                  {isOpen ? (
+                    <ChevronUp className="w-6 h-6 text-event-purple" />
+                  ) : (
+                    <ChevronDown className="w-6 h-6 text-event-purple" />
+                  )}
                 </div>
-              </a>
+              </button>
+
+              {/* Iframe xổ xuống khi mở */}
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{
+                  height: isOpen ? "auto" : 0,
+                  opacity: isOpen ? 1 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d931.1615785304035!2d105.80119727501123!3d21.0068101746111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aca166afffff%3A0x6a1ed9cc54f738d9!2zMjVUMiBQLiBOZ3V54buFbiBUaOG7iyBUaOG6rXAsIFRydW5nIEhvw6AsIEPhuqd1IEdp4bqleSwgSMOgIE7hu5lpIDEwMDAwMCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1740836258277!5m2!1svi!2s"
+                  width="100%"
+                  height="450"
+                  loading="lazy"
+                  className="rounded-lg mt-2"
+                ></iframe>
+              </motion.div>
             </div>
           </section>
 
@@ -224,8 +251,8 @@ const Index = () => {
             <div className="">
               <div className="rounded-lg">
                 <div className="flex items-center space-x-4 mb-4">
-                  <User className="w-8 h-8 text-event-purple" />
-                  <h2 className="text-xl font-semibold text-event-purple">
+                  <User className="md:w-8 md:h-8 text-event-purple" />
+                  <h2 className="md:text-xl text-base font-semibold text-event-purple">
                     Thông tin Khách mời
                   </h2>
                 </div>
@@ -361,8 +388,8 @@ const Index = () => {
             <div className="">
               <div className="">
                 <div className="flex items-center mb-4">
-                  <Clock className="w-8 h-8 text-event-purple" />
-                  <h2 className="text-xl font-semibold text-event-purple ml-4">
+                  <Clock className="md:w-8 md:h-8 text-event-purple" />
+                  <h2 className="md:text-xl text-base font-semibold text-event-purple ml-4">
                     Timeline Sự kiện
                   </h2>
                 </div>
