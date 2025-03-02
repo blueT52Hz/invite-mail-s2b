@@ -24,9 +24,9 @@ const EventDetails = {
   time: "18:30-21:30",
   dressCode: ["#2E5077", "#000", "#fff"],
   thumbnail:
-    "https://scontent.fhan14-2.fna.fbcdn.net/v/t1.15752-9/476365829_646358724576002_622861065549252183_n.png?stp=dst-png_s2048x2048&_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGp7ydtdN7KXqUKbLJD0TEbR9-J9seVgntH34n2x5WCe41a_pv97YdncQg7Lbken_y5NagM_JhSJsYvaLtHNEAC&_nc_ohc=l7xs6GqkCtMQ7kNvgFRjQ-K&_nc_oc=AdixOBcFjd4xKznXk-pJJxZjqE8SwR3G_0uuHQBJ6cNSUZEShX-G49Mr9NbzizYuD2g&_nc_zt=23&_nc_ht=scontent.fhan14-2.fna&oh=03_Q7cD1gF6rB1jeac1Z1_EkDEMbrkIDu5fxJ91g3LEfgHQqt_jsw&oe=67E3B241",
+    "https://res.cloudinary.com/dt1fb17gi/image/upload/v1740893287/cover2_erm1dc.jpg",
   location: {
-    name: "Tầng 11 VG Building",
+    name: "Tầng 11, Tòa nhà VG",
     address: "Ngõ 235 Đ. Nguyễn Trãi, Thanh Xuân Trung, Thanh Xuân, Hà Nội",
     mapUrl: "https://www.google.com/maps?cid=11743612530132812167",
   },
@@ -73,6 +73,7 @@ const Index = () => {
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
   const clb = searchParams.get("club");
+  const key = searchParams.get("key");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loadingParticipationChange, setLoadingParticipationChange] =
@@ -95,7 +96,7 @@ const Index = () => {
           await new Promise((resolve) => setTimeout(resolve, 2000));
 
         const [response] = await Promise.all([
-          fetch(`${getBaseUrlPRO}?email=${email}&club=${clb}`),
+          fetch(`${getBaseUrlPRO}?email=${email}&club=${clb}&key=${atob(key)}`),
           new Promise((resolve) =>
             setTimeout(resolve, guest.email !== "Không xác định" ? 0 : 1000)
           ), // Đảm bảo tối thiểu 1ss
@@ -139,6 +140,7 @@ const Index = () => {
               email: guest.email,
               club: clb,
               join: String(participating),
+              key: atob(key),
             }),
           }),
           new Promise((resolve) => setTimeout(resolve, 1000)), // Đảm bảo tối thiểu 1s
@@ -161,7 +163,7 @@ const Index = () => {
         <section className="container mx-0 my-0 px-0 animate-fadeIn overflow-hidden">
           <div className="mb-8">
             <img
-              src={"/images/cover.png"}
+              src={"/images/cover.jpg"}
               alt="Event thumbnail"
               className="w-full rounded-lg mb-4 object-cover"
             />
