@@ -240,7 +240,7 @@ const Index = () => {
                 className="overflow-hidden"
               >
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d931.1615785304035!2d105.80119727501123!3d21.0068101746111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aca166afffff%3A0x6a1ed9cc54f738d9!2zMjVUMiBQLiBOZ3V54buFbiBUaOG7iyBUaOG6rXAsIFRydW5nIEhvw6AsIEPhuqd1IEdp4bqleSwgSMOgIE7hu5lpIDEwMDAwMCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1740836258277!5m2!1svi!2s"
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1891.586786052652!2d105.8089066!3d20.9938035!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac9689c3935d%3A0x6747bba193366e51!2sVG%20Building!5e1!3m2!1svi!2s!4v1740939637272!5m2!1svi!2s"
                   width="100%"
                   height="450"
                   loading="lazy"
@@ -249,7 +249,6 @@ const Index = () => {
               </motion.div>
             </div>
           </section>
-
           {/* Guest List Section with RSVP */}
           <section className="container px-0 py-0 mx-0 animate-fadeIn delay-200">
             <div className="">
