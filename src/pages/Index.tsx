@@ -22,7 +22,7 @@ const EventDetails = {
     "Thư mời Tham dự Sinh nhật\n Cộng đồng phát triển tài năng sinh viên S2B",
   date: "Thứ Bảy, ngày 15 tháng 3 năm 2025",
   time: "18:30-21:30",
-  dressCode: ["#2E5077", "#000", "#fff"],
+  dressCode: ["#F2E2B1", "#2E5077", "#000", "#fff"],
   thumbnail:
     "https://res.cloudinary.com/dt1fb17gi/image/upload/v1740893287/cover2_erm1dc.jpg",
   location: {
@@ -122,7 +122,6 @@ const Index = () => {
   }, [email]);
 
   const handleParticipationChange = async (participating: boolean) => {
-    if (participating === guest.participating) return;
     setGuest({ ...guest, participating, confirmed: true });
 
     if (guest.email !== "Không xác định") {
@@ -303,7 +302,7 @@ const Index = () => {
                               {errorMessage}
                             </span>
                           </div>
-                        ) : guest?.confirmed ? (
+                        ) : guest?.confirmed || guest.participating ? (
                           <>
                             <Check className="w-4 h-4 text-green-500" />
                             <span className="text-sm text-event-gray">
@@ -332,18 +331,15 @@ const Index = () => {
                             {/* Nút Tham gia */}
                             <button
                               onClick={() => handleParticipationChange(true)}
-                              disabled={loadingParticipationChange} // Không bấm được khi loading
+                              disabled={loadingParticipationChange} // Chỉ disable khi đang loading
                               className={`px-2 py-2 rounded-lg transition-colors flex-1 flex items-center justify-center gap-2 shadow-md ${
                                 guest?.participating
                                   ? "bg-event-purple text-white"
                                   : "bg-gray-100 text-gray-600"
                               } ${
-                                loadingParticipationChange ||
-                                guest.participating
-                                  ? "cursor-not-allowed"
+                                loadingParticipationChange
+                                  ? "cursor-not-allowed opacity-50"
                                   : ""
-                              } ${
-                                loadingParticipationChange ? "opacity-50" : ""
                               }`}
                             >
                               {loadingParticipationChange &&
@@ -356,18 +352,15 @@ const Index = () => {
                             {/* Nút Vắng mặt */}
                             <button
                               onClick={() => handleParticipationChange(false)}
-                              disabled={loadingParticipationChange} // Không bấm được khi loading
+                              disabled={loadingParticipationChange} // Chỉ disable khi đang loading
                               className={`px-2 py-2 rounded-lg transition-colors flex-1 flex items-center justify-center gap-2 shadow-md ${
-                                !guest?.participating
+                                !guest?.participating && guest.confirmed
                                   ? "bg-event-purple text-white"
                                   : "bg-gray-100 text-gray-600"
                               } ${
-                                loadingParticipationChange ||
-                                !guest.participating
-                                  ? "cursor-not-allowed"
+                                loadingParticipationChange
+                                  ? "cursor-not-allowed opacity-50"
                                   : ""
-                              } ${
-                                loadingParticipationChange ? "opacity-50" : ""
                               }`}
                             >
                               {loadingParticipationChange &&
