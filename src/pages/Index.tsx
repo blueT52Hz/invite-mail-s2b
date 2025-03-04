@@ -12,6 +12,7 @@ import {
   ArrowRight,
   ChevronDown,
   ChevronUp,
+  Utensils,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -69,7 +70,9 @@ const postTestUrlPRO =
   "https://workflow.proptit.com/webhook-test/515425de-e385-4777-b05e-310fc8afbec2";
 
 const Index = () => {
+  const isEventDay = new Date().toISOString().split("T")[0] === "2025-03-15";
   const [isOpen, setIsOpen] = useState(false);
+  const [isMealOpen, setIsMealOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
   const clb = searchParams.get("club");
@@ -248,6 +251,51 @@ const Index = () => {
               </motion.div>
             </div>
           </section>
+          {/* <section className="container mx-0 px-0 py-0 animate-fadeIn delay-100">
+            <div className="">
+              <button
+                onClick={() => setIsMealOpen(!isMealOpen)}
+                className="block w-full hover:bg-slate-100 transition-all rounded-lg py-2 relative text-left"
+              >
+                <div className="flex justify-between items-center">
+                  <div className="flex items-start space-x-4">
+                    <Utensils className="md:w-8 md:h-8 my-auto text-event-purple flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold text-event-purple text-base md:text-xl">
+                        {EventDetails.location.name}
+                      </h3>
+                      <p className="text-event-gray mt-1 text-sm md:text-base">
+                        {EventDetails.location.address}
+                      </p>
+                    </div>
+                  </div>
+                  {isMealOpen ? (
+                    <ChevronUp className="w-6 h-6 text-event-purple" />
+                  ) : (
+                    <ChevronDown className="w-6 h-6 text-event-purple" />
+                  )}
+                </div>
+              </button>
+
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{
+                  height: isMealOpen ? "auto" : 0,
+                  opacity: isMealOpen ? 1 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1891.586786052652!2d105.8089066!3d20.9938035!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac9689c3935d%3A0x6747bba193366e51!2sVG%20Building!5e1!3m2!1svi!2s!4v1740939637272!5m2!1svi!2s"
+                  width="100%"
+                  height="450"
+                  loading="lazy"
+                  className="rounded-lg mt-2"
+                ></iframe>
+              </motion.div>
+            </div>
+          </section> */}
           {/* Guest List Section with RSVP */}
           <section className="container px-0 py-0 mx-0 animate-fadeIn delay-200">
             <div className="">
@@ -331,11 +379,14 @@ const Index = () => {
                             {/* Nút Tham gia */}
                             <button
                               onClick={() => handleParticipationChange(true)}
-                              disabled={loadingParticipationChange} // Chỉ disable khi đang loading
+                              disabled={
+                                loadingParticipationChange ||
+                                (guest.participating && guest.confirmed)
+                              } // Chỉ disable khi đang loading
                               className={`px-2 py-2 rounded-lg transition-colors flex-1 flex items-center justify-center gap-2 shadow-md ${
                                 guest?.participating
-                                  ? "bg-event-purple text-white"
-                                  : "bg-gray-100 text-gray-600"
+                                  ? "bg-event-purple text-white cursor-not-allowed"
+                                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                               } ${
                                 loadingParticipationChange
                                   ? "cursor-not-allowed opacity-50"
@@ -352,11 +403,14 @@ const Index = () => {
                             {/* Nút Vắng mặt */}
                             <button
                               onClick={() => handleParticipationChange(false)}
-                              disabled={loadingParticipationChange} // Chỉ disable khi đang loading
+                              disabled={
+                                loadingParticipationChange ||
+                                (!guest.participating && guest.confirmed)
+                              } // Chỉ disable khi đang loading
                               className={`px-2 py-2 rounded-lg transition-colors flex-1 flex items-center justify-center gap-2 shadow-md ${
                                 !guest?.participating && guest.confirmed
-                                  ? "bg-event-purple text-white"
-                                  : "bg-gray-100 text-gray-600"
+                                  ? "bg-event-purple text-white cursor-not-allowed"
+                                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                               } ${
                                 loadingParticipationChange
                                   ? "cursor-not-allowed opacity-50"
